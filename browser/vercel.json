@@ -1,8 +1,43 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/home-birla-school-hsp/browser",
+  "cleanUrls": true,
+  "trailingSlash": false,
   "rewrites": [
+    { "source": "/:page(about|career|contact|soul-science)", "destination": "/index.html" },
+    { "source": "/academics/:slug(pre-primary-years|primary-years|middle-years|high-school|teacher-training|virtual-classrooms|special-projects)", "destination": "/index.html" },
+    { "source": "/media/:slug(awards|news-events|back-to-school|birla-buzz)", "destination": "/index.html" },
+    { "source": "/alumni/:slug(guidance|success-stories)", "destination": "/index.html" }
+  ],
+  "headers": [
     {
       "source": "/(.*)",
-      "destination": "/index.html"
+      "headers": [
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src https://www.youtube.com https://www.youtube-nocookie.com https://maps.google.com https://www.google.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(self \"https://www.youtube.com\"), accelerometer=(self \"https://www.youtube.com\")" },
+        { "key": "Cross-Origin-Opener-Policy", "value": "same-origin-allow-popups" },
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains" },
+        { "key": "Access-Control-Allow-Origin", "value": "https://www.birlaopenmindshoshiarpur.com" },
+        { "key": "X-DNS-Prefetch-Control", "value": "on" }
+      ]
+    },
+    {
+      "source": "/:file([^/]+-[A-Z0-9]{8}\\.(?:js|css))",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/:dir(images|media)/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=2592000, stale-while-revalidate=86400" }]
+    },
+    {
+      "source": "/:file(favicon.ico|favicon-48.png|favicon-96.png|icon-192.png|icon-512.png|apple-touch-icon.png|logo.webp|logo-mark.webp|og-image.jpg)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
     }
   ]
 }
