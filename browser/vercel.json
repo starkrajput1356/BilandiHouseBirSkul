@@ -39,6 +39,5 @@
       "source": "/:file(favicon.ico|favicon-48.png|favicon-96.png|icon-192.png|icon-512.png|apple-touch-icon.png|logo.webp|logo-mark.webp|og-image.jpg)",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }]
     }
-
   ]
 }
